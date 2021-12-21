@@ -1,6 +1,31 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 
-class User extends React.Component { //user component is becoming class component
+const User = (props) => {
+  const [planet, setPlanet] = useState("Earth");
+      //variable  ownfuntion(updating state)
+
+  //componentDidMount
+  useEffect(()=> { //updating
+    console.log("Component mounting!");
+  }, []) //[] -> empty array (things will go on repeating unnecessarily, empty array avoids this)
+ 
+  //componentDidUpdate
+  useEffect(()=> { //checking
+    console.log("Component changes");
+  }, [planet]);
+  return(
+    <div>
+      <h1>{props.name}</h1>
+      <p>{props.description}</p>
+      <button onClick={() => setPlanet("Mercury")}>{planet}</button>
+    </div>
+  )
+}
+
+
+export default User;
+
+/*class User extends React.Component { //user component is becoming class component
   constructor(props) {
     super(props);
 
@@ -9,12 +34,10 @@ class User extends React.Component { //user component is becoming class componen
     };
     console.log("Construstor!");
   }
-
 componentDidMount() {
   this.setState({planet: "Mars"}); //setState -> updating
   console.log("componentDidMount!");
 }
-
   render() { //logic
     console.log("Render!");
     return ( 
@@ -26,11 +49,7 @@ componentDidMount() {
     );
   }
 
-}
-
-
-export default User;
-
+}*/
 //props-> properties/parameters ->  data is passed from the user(one) component to app(other) component
 
 /*LIFE CYCLE METHODS
@@ -39,3 +58,6 @@ export default User;
 2)UPDATE: Component is being updated
 3)UNMOUNT: Component is removed from DOM
 */ 
+
+//Hooks enable use of states in your functional component
+//popular hooks in react ->useState(initialize the state) ->useEffect hooks (you need to import it from react(destructure and import it)) 
